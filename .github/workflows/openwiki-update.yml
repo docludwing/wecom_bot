@@ -30,7 +30,7 @@ jobs:
 
       - name: Run OpenWiki
         # --update 同时处理首次生成(仓库还没有 openwiki/ 目录时)。
-        run: openwiki code --update --print
+        run: openwiki bitchat --update --print
         env:
           # 本机 ~/.openwiki/.env 里的 OpenAI key 只对本地 CLI 生效,
           # CI 是独立的云端环境,必须在仓库 Settings > Secrets 里单独配置 OPENAI_API_KEY。
