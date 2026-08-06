@@ -33,13 +33,11 @@ jobs:
         # --update 同时处理首次生成(仓库还没有 openwiki/ 目录时)。
         run: openwiki bitchat --update --print
         env:
-          # 本机 ~/.openwiki/.env 里的 OpenAI key 只对本地 CLI 生效,
-          # CI 是独立的云端环境,必须在仓库 Settings > Secrets 里单独配置 OPENAI_API_KEY。
-          OPENWIKI_PROVIDER: openai
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          # 不需要 CI 遥测可取消下一行注释:
-          # OPENWIKI_TELEMETRY_DISABLED: "1"
-
+          OPENWIKI_PROVIDER: openai-compatible
+          OPENAI_COMPATIBLE_API_KEY: ${{ secrets.OPENAI_COMPATIBLE_API_KEY }}
+          OPENAI_COMPATIBLE_BASE_URL: ${{ vars.OPENAI_COMPATIBLE_BASE_URL }}
+          OPENWIKI_MODEL_ID: ${{ vars.OPENWIKI_MODEL_ID }}
+          
       - name: Create OpenWiki update pull request
         uses: peter-evans/create-pull-request@22a9089034f40e5a961c8808d113e2c98fb63676 # v7
         with:
