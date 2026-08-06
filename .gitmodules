@@ -1,0 +1,4 @@
+[submodule "bitchat"]
+	path = bitchat
+	url = https://github.com/docludwing/bitchat.git
+	branch = main
