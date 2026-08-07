@@ -12,7 +12,7 @@ permissions:
 
 jobs:
   update:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Windows, X64]
     steps:
       - name: Check out repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -28,10 +28,12 @@ jobs:
       - name: Install OpenWiki
         # mermaid + jsdom 可选,用于校验生成的 Mermaid 图;仓库里没有图表需求可以去掉。
         run: npm install --global openwiki mermaid@11.16.0 jsdom@29.1.1
+        shell: powershell
 
       - name: Run OpenWiki
         # --update 同时处理首次生成(仓库还没有 openwiki/ 目录时)。
         run: openwiki bitchat --update --print
+        shell: powershell
         env:
           OPENWIKI_PROVIDER: openai-compatible
           OPENAI_COMPATIBLE_API_KEY: ${{ secrets.OPENAI_COMPATIBLE_API_KEY }}
